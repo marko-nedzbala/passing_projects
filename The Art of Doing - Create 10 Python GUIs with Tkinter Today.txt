@@ -1,0 +1,200 @@
+
+https://github.com/PacktPublishing/The-Art-of-Doing-Create-10-Python-GUIs-with-Tkinter-Today
+
+14:06:00
+
+Chapter02
+The Basics
+
+most basic Tkinter program
+
+import tkinter
+root = tkinter.Tk()
+root.mainloop()
+
+can use icons and get them from this website
+https://www.iconarchive.com/
+
+resize the window
+root.geometry('250x700')
+
+disallow resizing
+root.resizable(0,0)
+
+change options of a widget
+root.config(bg='blue')
+
+creating a second window
+# call the top level widget
+top = tkinter.Toplevel()
+# can set the values of the top level window just like the root window
+
+Labels and the Pack System
+# widgets
+name_label01 = tkinter.Label(root, text='Example')
+name_label01.pack()
+
+name_label02 = tkinter.Label(root, text='Example02', font=('Arial', 18, 'bold'))
+# add padding
+name_label02.pack(padx=10, pady=(padding_top, padding_bottom))
+
+internal padding, within a widget
+ipadx=50, ipady=60
+
+anchor a widget
+anchor='w'
+
+filling the screen
+.pack(fill='x')
+.pack(fill='y', expand=True)
+
+Buttons and the Grid System
+name_button = tkinter.Button(root, text='Name')
+name_button.grid(row=0, column=0)
+
+time_button = tkinter.Button(root, text='Time', bg='#00ffff')
+time_button.grid(row=0, column=1)
+
+place_button = tkinter.Button(root, text='Place', bg='#00ffff', activebackground='#ff0000')
+place_button.grid(row=0, column=2, padx=10, pady=10, ipadx=15)
+
+day_button = tkinter.Button(root, text='Day', bg='black', fg='white', borderwidth=5)
+# span the entire 3 columns
+day_button.grid(row=1, column=0, columnspan=3, sticky='WE')
+
+Frames
+
+# frames
+from tkinter import BOTH
+pack_frame = tkinter.Frame(root, bg='red')
+grid_frame1 = tkinter.Frame(root, bg='blue')
+grid_frame2 = tkinter.LabelFrame(root, text='Grid Frame 2', borderwidth=5)
+# pack frame onto the root
+pack_frame.pack(fill=BOTH, expand=True)
+grid_frame1.pack(fill='x', expand=True)
+grid_frame2.pack(fill=BOTH, expand=True, padx=10, pady=10)
+# pack_frame layout
+tkinter.Label(pack_frame, text='text').pack()
+tkinter.Label(pack_frame, text='text').pack()
+tkinter.Label(pack_frame, text='text').pack()
+# pack grid_frame1 layout
+tkinter.Label(grid_frame1, text='text').grid(row=0, column=0)
+tkinter.Label(grid_frame1, text='text').grid(row=1, column=1)
+tkinter.Label(grid_frame1, text='text').grid(row=2, column=2)
+tkinter.Label(grid_frame1, text='large').grid(row=3, column=0)
+# pack grid_frame2 layout
+tkinter.Label(grid_frame2, text='text').grid(row=0, column=0)
+tkinter.Label(grid_frame2, text='text').grid(row=1, column=1)
+tkinter.Label(grid_frame2, text='text').grid(row=2, column=2)
+tkinter.Label(grid_frame2, text='large').grid(row=3, column=0)
+
+Entires, Functions and Lambdas
+
+# define frames
+input_frame = tkinter.Frame(root, bg='#0000ff', width=500, height=100)
+output_frame = tkinter.Frame(root, bg='#ff0000', width=500, height=400)
+input_frame.pack(padx=10, pady=10)
+# pad on top and bottom
+output_frame.pack(padx=10, pady=(0,10))
+
+# add inputs to the frame
+text_entry = tkinter.Entry(input_frame, width=40)
+text_entry.grid(row=0, column=0, padx=5, pady=10)
+# extend the frame to match the entry
+input_frame.grid_propagate(0)
+
+# adding a function to our code
+def make_label():
+    text_label = tkinter.Label(output_frame, text=text_entry.get(), bg='#ff0000')
+    text_label.pack()
+    from tkinter import END
+    text_entry.delete(0, END)
+
+print_button = tkinter.Button(input_frame, text='Print Input', command=make_label)
+print_button.grid(row=0, column=1, padx=5, pady=5, ipadx=30)
+
+# keep the background when the label is added
+output_frame.pack_propagate(0)
+
+# pass a parameter with lambda
+value = 0
+def count_up(number):
+    global value
+    text = tkinter.Label(output_frame, text=number, bg='#ff0000')
+    text.pack()
+    value = number + 1
+
+count_button = tkinter.Button(input_frame, text='Count', command=lambda: count_up(value))
+count_button.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky='WE')
+
+Radio Buttons
+
+input_frame = tkinter.LabelFrame(root, text='This is a frame', width=350, height=1000)
+output_frame = tkinter.Frame(root, width=350, height=250)
+input_frame.pack(padx=10, pady=10)
+output_frame.pack(padx=10, pady=(0, 10))
+
+# to link the radio buttons to a variable
+from tkinter import IntVar
+number = IntVar()
+number.set(1)
+
+def make_label():
+    if number.get() == 1:
+        num_label = tkinter.Label(output_frame, text='You selected 1')
+    elif number.get() == 2:
+        num_label = tkinter.Label(output_frame, text='You selected 2')
+    
+    num_label.pack()
+
+# create radio buttons
+# link variable to radio buttons
+radio1 = tkinter.Radiobutton(input_frame, text='Print 1', variable=number, value=1)
+radio2 = tkinter.Radiobutton(input_frame, text='Print 2', variable=number, value=2)
+print_button = tkinter.Button(input_frame, text='Print the number', command=make_label)
+
+radio1.grid(row=0, column=0, padx=10, pady=10)
+radio2.grid(row=0, column=1, padx=10, pady=10)
+print_button.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+
+Images
+
+
+
+Chapter03
+Application 0: Hello GUI World
+
+https://coolors.co/
+
+
+Chapter05
+Application 2: Simple Check Checklist
+
+get the keys from a widget
+for i in my_listbox.keys():
+    print(i)
+
+
+
+Chapter07
+Application 4: Notepad
+
+getting a list of available fonts
+
+import tkinter
+from tkinter import font
+root = tkinter.Tk()
+fonts = font.families()
+for font in fonts:
+	print(font)
+
+
+
+Chapter08
+Application 5: Color Theme Maker
+
+
+
+
+
+
