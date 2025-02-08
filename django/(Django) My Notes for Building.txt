@@ -49,8 +49,13 @@ def mine(request):
 
 Django ORM
 
+$ python manage.py dbshell
 
 
+
+User management
+authentication: proving who you are; UserModel class
+authorization: the system allowing you to perform an action; Session Management middleware
 
 
 
