@@ -11,6 +11,28 @@ forloop object contains attributes with information about the state of the loop 
     something amazing
 {% endif %}
 
+TEMPLATES value is a dictionary containing four keys that control how templates work in Django:
+1.) BACKEND: specifies which template engine to use in your project
+2.) DIRS: is a list of directories in which Django looks for templates.
+3.) APP_DIRS: when True (the default), Django will look for template directories within the app directories, the apps are searched in order of their appearance in the INSTALLED_APPS configuration value.
+4.) OPTIONS: is a nested dictionary to pass configuration options to the template engine. The default values for this are sufficient.
+
+/templates/
+./manage.py
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [ BASE_DIR / 'templates'],
+        ...
+    }
+]
+
+
+
+
+
+
 
 
 Views
@@ -23,6 +45,9 @@ def mine(request):
 
 
 
+
+
+Django ORM
 
 
 
