@@ -57,7 +57,9 @@ User management
 authentication: proving who you are; UserModel class
 authorization: the system allowing you to perform an action; Session Management middleware
 
-
+{% block content %}
+    {{ content|safe }}
+{% endblock content %}
 
 
 
