@@ -1,0 +1,53 @@
+
+
+Django Shell
+$ python manage.py shell
+
+
+Templates
+forloop object contains attributes with information about the state of the loop as it is being iterated
+
+{% if forloop.last %}
+    something amazing
+{% endif %}
+
+
+
+Views
+render() in a view
+return render(request, filename, data)
+
+def mine(request):
+    # code
+    return render(request, 'mine.html', data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
