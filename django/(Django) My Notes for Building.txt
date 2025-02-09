@@ -57,13 +57,19 @@ User management
 authentication: proving who you are; UserModel class
 authorization: the system allowing you to perform an action; Session Management middleware
 
+from django.contrib.auth.decorators import login_require
+the view needs @login_required
+
 {% block content %}
     {{ content|safe }}
-{% endblock content %}
+{% endblock content %}`
 
+django.contrib.auth.urls
+path('accounts/', include('django.contrib.auth.urls'))
 
+registration/login.html
 
-
+@login_required requires you to be logged in and takes you to the login page
 
 
 
