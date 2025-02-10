@@ -1,4 +1,9 @@
 
+Use this for reading the Django Docs
+https://docs.djangoproject.com/en/5.1/topics/
+
+
+
 
 Django Shell
 $ python manage.py shell
@@ -57,6 +62,17 @@ User management
 authentication: proving who you are; UserModel class
 authorization: the system allowing you to perform an action; Session Management middleware
 
+Create a user and link it to a different model
+from django.db import models
+from django.contrib.auth.models import User
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    my_other_field = models.ManyToManyField(ModelName01, blank=True)
+    my_another_field = models.ManyToManyField(ModelName02, blank=True)
+
+
+
 from django.contrib.auth.decorators import login_require
 the view needs @login_required
 
@@ -70,6 +86,226 @@ path('accounts/', include('django.contrib.auth.urls'))
 registration/login.html
 
 @login_required requires you to be logged in and takes you to the login page
+
+//example
+@login_required
+def restricted_page(request):
+    data = {
+        'title': 'Restricted page',
+        'cotent': '<h1>You are logged in</h1>',
+    }
+    return render(request, 'example.html', data)
+
+@login_required
+def my_restricted(request, my_id):
+    musician = get_object_or_404(MyUser, id=my_id)
+    profile = request.user.userprofile #2 request.user is the authenticated user, and .userprofile is the reverse relationship to the UserProfile ORM model.
+
+Logout has to be a form
+
+settings.py
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+any_page.html
+{% if user.is_authenticated &}
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+Password reset
+# my webapge.html
+<a href="{% url 'password_reset' %}">Lost password?</a>
+
+registration/password_reset_form.html
+...other content
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+<input type="submit" value="Reset Password">
+
+registration/password_reset_done.html
+...whatever text your want
+
+Console Email Backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+example of an email message
+{% autoescape off %}  #1
+
+  You're receiving this email because you requested a password reset
+  for your user account at Alexandria.
+
+  Please go to the following page and choose a new password:
+
+  {% block reset_link %}
+    # important to reference the website where the request came from
+    {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+  {% endblock %}
+
+  Your username, in case you've forgotten: {{ user.get_username }}
+
+  Thanks for using our site!
+
+{% endautoescape %}
+
+password_reset_confirm.html
+use this link to get there
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+# example of a good page
+{% if validlink %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Change password">
+  </form>
+{% else %}
+  <p>
+    Invalid password reset link!
+  </p>
+{% endif %}
+
+
+password_reset_complete.html
+<h2>Your password has been set</h2>
+<p><a href="{{ login_url }}">Login</a></p>
+
+
+
+FORMS
+forms.py cannot use template features, like conditional formatting
+
+django.forms.Form
+
+forms are usually a single view, with a redirect for the GET/POST
+
+redirect()
+render()
+
+from django.shortcuts import render, redirect
+from . import forms
+def my_form(request):
+    if request.method == 'GET':
+        form = forms.MyForm()
+    elif request.method == 'POST':
+        form = forms.MyForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            stock = form.cleaned_data['stock']
+            return redirect('my_page_to_redirect')
+
+    data = {
+        'form': form,
+    }
+
+    return render(request, 'myform.html', data)
+
+myform.html
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+form.as_table
+table columns and labels all end up the same width
+
+can add CSS classes via attrs
+comment = forms.CharField(
+        widget=forms.Textarea(  #4
+            attrs={"rows": "6", "cols": "50"}  #5
+        )
+    )
+
+
+Django excepts the field name -> tag's name attributes
+tag's ID attribute to contain id-underscore-field
+
+form.individual_field
+# example
+{% if form.first_name.value %}
+    value="{{ form.first_name.value }}"
+
+Reusable field group templates
+Django 5: structure of a form field is determined by a template, this template contains tags for labels and inputs and if clauses that display help text associated with the field
+# example
+class MyForm(forms.Form):
+    name = forms.CharField(template_name='custom_input_field.html')
+
+ModelForm
+Meta specifies the behavior of the class
+
+class MyModelForm(forms.ModelForm):
+    class Meta:
+        model = Stocks
+        fields = ['ticker', 'shares', 'price']
+
+    # helpers
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['ticker'].label = 'The Stock ticker'
+        self.fields['shares'].label = 'The number of shares'
+        self.fields['price'].label = 'The price per share'
+        # also acceptable
+        # labels = {
+        #     'ticker': 'The Stock ticker'
+        # }
+
+__all__ and except to list all fields
+
+factory function to create the default form
+my_form = forms.modelform_factory(MyClass, fields=['list', 'of', 'fields'])
+
+need 2 views
+1.) handles the form
+2.) redirect the user to when the form is complete
+
+Steps to set this up:
+1.) Model
+2.) ModelForm
+3.) View
+4.) HTML
+
+Our view
+@login_required
+def my_model_form(request):
+    if request.method == 'GET':
+        form = MyModelForm()
+    else:
+        form = MyModelForm(request.POST)
+        if form.is_valid():
+            stock = form.save(commit=False)
+            stock.owner = request.user
+            stock.save()
+
+            return redirect('my_page_name')
+    data = {
+        'form': form
+    }
+    return render(request, 'my_form.html', data)
+
+
+Editing existing data with forms
+
+
+
+
+
+123ABCdef!!
+
+
+
+
+
+
+
+
 
 
 

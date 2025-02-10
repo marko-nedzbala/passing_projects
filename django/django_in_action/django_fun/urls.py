@@ -16,18 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from stocks import views as stock_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     # loading our own page
-    path('', views.first, name='first'),
+    path('', stock_views.first, name='first'),
 
     # logged in example
-    path('example/', views.restricted_page, name='example'),
+    path('example/', stock_views.restricted_page, name='example'),
 
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('form/', views.my_form, name='form'),
+    path('form/', stock_views.my_model_form, name='my_form'),
+
+    
 ]

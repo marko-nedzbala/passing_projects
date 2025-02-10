@@ -10,6 +10,29 @@
 <body>
     {% block content %}
         {{ content|safe }}
+    
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+
+    <a href="{% url 'password_reset' %}">Lost password?</a>
+
+    {{ content }}
+
+    {{ user }}
+    
+    {% for s in stocks %}
+        <p>{{ s.ticker }}</p>
+        <p>{{ s.shares }}</p>
+        <p>{{ s.price }}</p>
+    {% endfor %}
+
     {% endblock content %}
 </body>
 </html>
