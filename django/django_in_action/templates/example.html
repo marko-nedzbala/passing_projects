@@ -28,7 +28,8 @@
     {{ user }}
     
     {% for s in stocks %}
-        <p>{{ s.ticker }}</p>
+        <p><a href="{% url 'editing' s.id %}">{{ s.ticker }}</a></p>
+        <p>ID: {{ s.id }}</p>
         <p>{{ s.shares }}</p>
         <p>{{ s.price }}</p>
     {% endfor %}

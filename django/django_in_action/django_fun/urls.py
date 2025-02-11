@@ -31,5 +31,7 @@ urlpatterns = [
 
     path('form/', stock_views.my_model_form, name='my_form'),
 
+    path('edit/<int:id>/', stock_views.edit_stocks, name='editing'),
+
     
 ]

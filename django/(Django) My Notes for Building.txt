@@ -293,6 +293,110 @@ def my_model_form(request):
 
 Editing existing data with forms
 
+# the name of our view
+def edit_stocks(request, id=0):
+    # if the id is 0, create an object, other wise edit the ID of our object
+    if request.method == 'GET':
+        if id == 0:
+            form = MyModelForm()
+        else:
+            # get_object_or_404 is important so it only gets the user's items
+            ad = get_object_or_404(Stocks, id=id, owner=request.user)
+            print(f'Get: {ad}')
+            # instance tells us, what object the form should populate
+            form = MyModelForm(instance=ad)
+    else:
+        if id == 0:
+            form = MyModelForm(request.POST)
+        else:
+            ad = get_object_or_404(Stocks, id=id, owner=request.user)
+            print(f'Post: {ad}')
+            form = MyModelForm(request.POST, instance=ad)
+
+        # save our form data
+        if form.is_valid():
+            ad = form.save(commit=False)
+            ad.owner = request.user
+            ad.save()
+
+
+            return redirect('example')
+    data = {
+        'form': form,
+        'stock': fd
+    }
+    return render(request, 'edit.html', data)
+
+
+our page.html for the form editing
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ticker</button>
+    {{ stock.name }} - {{ stock.shares }}
+</form>
+
+a list page for all our items, that allows us to edit the items
+{% for s in stocks %}
+    <p><a href="{% url 'editing' s.id %}">{{ s.ticker }}</a></p>
+    <p>ID: {{ s.id }}</p>
+    <p>{{ s.shares }}</p>
+    <p>{{ s.price }}</p>
+{% endfor %}
+
+
+
+Serving static files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 
@@ -47,9 +47,13 @@ def get_all_stocks(request):
     return render(request, 'example.html', data)
 
 @login_required
-def my_model_form(request):
+def my_model_form(request, id=0):
     if request.method == 'GET':
-        form = MyModelForm()
+        if id == 0:
+            form = MyModelForm()
+        else:
+            ad = get_object_or_404(Stocks, id=id, owner=request.user)
+            form = Stocks(ad)
     else:
         form = MyModelForm(request.POST)
         if form.is_valid():
@@ -70,3 +74,34 @@ def form_accepted(request):
         '''
     }
     return render(request, 'form_out.html', data)
+
+
+def edit_stocks(request, id=0):
+    fd = Stocks.objects.filter(id=id)
+    if request.method == 'GET':
+        if id == 0:
+            form = MyModelForm()
+        else:
+            ad = get_object_or_404(Stocks, id=id, owner=request.user)
+            print(f'Get: {ad}')
+            form = MyModelForm(instance=ad)
+    else:
+        if id == 0:
+            form = MyModelForm(request.POST)
+        else:
+            ad = get_object_or_404(Stocks, id=id, owner=request.user)
+            print(f'Post: {ad}')
+            form = MyModelForm(request.POST, instance=ad)
+
+        if form.is_valid():
+            ad = form.save(commit=False)
+            ad.owner = request.user
+            ad.save()
+        
+
+            return redirect('example')
+    data = {
+        'form': form,
+        'stock': fd
+    }
+    return render(request, 'edit.html', data)
