@@ -7,14 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Homepage</h1>
-
-    {% if user.is_authenticated %}
-        <p>Hi {{ user }}</p>
-    {% else %}
-        <p>Not logged in</p>
-    {% endif %}
-
-    <img src="{% static 'images/puppy.jpg' %}" height="100">
+    <h1>Uploaded</h1>
+    {% for u in ups %}
+        {{ u.name }}
+        <img src="{{ u.picture.url }}" alt="">
+    {% endfor %}
 </body>
 </html>

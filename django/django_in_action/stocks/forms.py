@@ -1,5 +1,5 @@
 from django import forms
-from .models import Stocks
+from .models import Stocks, MyUploadModel
 
 class MyForm(forms.Form):
     name = forms.CharField()
@@ -20,3 +20,6 @@ class MyModelForm(forms.ModelForm):
         # labels = {
         #     'ticker': 'The Stock ticker'
         # }
+
+# class MyUploadModelForm(forms.ModelForm):
+uploadForm = forms.modelform_factory(MyUploadModel, fields=['name', 'picture'])

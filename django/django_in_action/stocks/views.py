@@ -105,3 +105,41 @@ def edit_stocks(request, id=0):
         'stock': fd
     }
     return render(request, 'edit.html', data)
+
+from .forms import uploadForm as UploadForm
+from .models import MyUploadModel
+@login_required
+def upload(request, id=0):
+    if id != 0:
+        id = get_object_or_404(MyUploadModel, id=id)
+        if not request.user.filter(id=id).exists():
+            print('Can only edit controlled venues')
+    
+    if request.method == 'GET':
+        if id == 0:
+            form = UploadForm()
+        else:
+            form = UploadForm(instance=id)
+    # POST request
+    else:
+        if id == 0:
+            obj = MyUploadModel.objects.create()
+        form = UploadForm(request.POST, request.FILES, instance=obj)
+        
+        if form.is_valid():
+            obj = form.save()
+        return redirect('uploads')
+    
+    data = {
+        'form': form
+    }
+    return render(request, 'my_upload.html', data)
+    
+def list_upload(request):
+    obj = MyUploadModel.objects.all()
+    data = {
+        'ups': obj
+    }
+    return render(request, 'uploads.html', data)
+
+

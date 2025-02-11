@@ -20,4 +20,9 @@ class Stocks(models.Model):
     def __str__(self):
         return str(self.ticker)
     
-
+# model for uploads
+class MyUploadModel(models.Model):
+    name = models.CharField(max_length=20)
+    picture = models.ImageField(blank=True, null=True, upload_to='%Y/%m/%d/')
+    
+ 

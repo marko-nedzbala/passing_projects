@@ -1,4 +1,24 @@
 
+https://docs.djangoproject.com/en/dev/topics/class-based-views/
+
+https://spookylukey.github.io/django-views-the-right-way/
+
+https://docs.djangoproject.com/en/dev/topics/http/middleware/
+
+https://docs.djangoproject.com/en/dev/ref/models/querysets/
+
+https://docs.djangoproject.com/en/dev/ref/models/expressions/
+
+https://djangocentral.com/django-orm-cheatsheet/
+
+https://builtwithdjango.com/projects/
+
+https://django-ninja.dev/
+
+
+
+
+
 Use this for reading the Django Docs
 https://docs.djangoproject.com/en/5.1/topics/
 
@@ -347,55 +367,149 @@ a list page for all our items, that allows us to edit the items
 
 
 Serving static files
+{% static %} returns a link and gets used inside <img> and <link>
+<img src="{% static 'img/logo.png' %}">
+
+{% load %} like an import statement
+
+.manage.py
+./static
+    /images
+    /js
+    /css
+
+settings.py
+STATIC_URL = '/static/'
+STATICFILES_DIRS = ( BASE_DIR / 'static', )
+
+Uploads
+files go on the server, and the database links them together using the FileField model field
+
+./django_project
+./uploads
+    ./project_name
+
+settings.py
+MEDIA_ROOT = BASE_DIR.parent / 'uploads/project_name/uploads'
+MEDIA_URL = '/media/'
+
+development server uses static() to serve these files
+
+urls.py
+from django.conf import settings  #1
+from django.conf.urls.static import static  #2
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+path for the file will be
+http://loccccalhost:8000/media/file_name.ext
+
+Uploading via Forms
+FileField or ImageField
+
+Step 1: Create the models for the forms
+# model for uploads
+class MyUploadModel(models.Model):
+    name = models.CharField(max_length=20)
+    # upload_to can be used to later the name of the directory a file gets uploaded into, always relative to MEDIA_ROOT
+    picture = models.ImageField(blank=True, null=True, upload_to='%Y/%m/%d/')
+
+# upload_to also accepts a function
+def user_path(instance, filename):
+    return f'user{instance.owner.id}/{filename}
+
+class MyUploadModel(models.Model):
+    name = models.CharField(max_length=20)
+    picture = models.ImageField(blank=True, null=True, upload_to=user_path)
+
+Step 2: Create the form
+forms.py
+from .models import MyUploadModel
+# class MyUploadModelForm(forms.ModelForm):
+uploadForm = forms.modelform_factory(MyUploadModel, fields=['name', 'picture'])
+
+Step 3: Create the view to allow uploads
+from .forms import uploadForm as UploadForm
+from .models import MyUploadModel
+@login_required
+def upload(request, id=0):
+    if id != 0:
+        id = get_object_or_404(MyUploadModel, id=id)
+        if not request.user.filter(id=id).exists():
+            print('Can only edit controlled venues')
+
+    if request.method == 'GET':
+        if id == 0:
+            form = UploadForm()
+        else:
+            form = UploadForm(instance=id)
+    # POST request
+    else:
+        if id == 0:
+            obj = MyUploadModel.objects.create()
+        form = UploadForm(request.POST, request.FILES, instance=obj)
+
+        if form.is_valid():
+            obj = form.save()
+        return redirect('uploads')
+
+    data = {
+        'form': form
+    }
+    return render(request, 'my_upload.html', data)
+
+Step 4: Create the page, in this cassse my_upload.html
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+Step 5: Create the urls.py file
+urlpatterns = [
+    path('my_uploaded/', stock_views.upload, name='my_uploaded'),
+    path('uploads/', stock_views.list_upload, name='uploads')
+]
+
+
+To view the uploaded files
+Step 1: Create the view
+
+def list_upload(request):
+    obj = MyUploadModel.objects.all()
+    data = {
+        'ups': obj
+    }
+    return render(request, 'uploads.html', data)
+
+Step 2: Create the uploads.html
+
+<h1>Uploaded</h1>
+{% for u in ups %}
+    {{ u.name }}
+    <img src="{{ u.picture.url }}" alt="">
+{% endfor %}
+
+For file uploads the best is to write a view, that view returns HTTP headers that point to the file and the web server does the rest
+Apache: X-Sendfile
+Nginx X-Accel-Redirect
+
+
+APIs
+Django Ninja
 
 
 
+HTMX
+similar to using a SPA, but with a lot less JavaScript
 
 
 
+Third Party Tools
+Crispy forms
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Django Distill: static sites
 
 
 

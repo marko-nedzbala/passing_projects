@@ -33,5 +33,23 @@ urlpatterns = [
 
     path('edit/<int:id>/', stock_views.edit_stocks, name='editing'),
 
+    path('my_uploaded/', stock_views.upload, name='my_uploaded'),
+
+    path('uploads/', stock_views.list_upload, name='uploads')
     
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
+
+
+
+
+
+

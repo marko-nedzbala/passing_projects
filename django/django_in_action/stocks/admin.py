@@ -17,5 +17,7 @@ class UserAdmin(BaseUserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
-from .models import Stocks
+from .models import Stocks, MyUploadModel
 admin.site.register(Stocks)
+
+admin.site.register(MyUploadModel)
