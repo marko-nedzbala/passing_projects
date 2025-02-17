@@ -87,3 +87,20 @@ local_settings.py
 
 .env
 db.sqlite3
+
+
+
+
+
+
+
+
+
+
+# === Rules for `node_modules` ===
+!**/node_modules/**
+/node_modules
+/tools/doc/node_modules
+/tools/clang-format/node_modules
+/tools/eslint/node_modules
+/tools/lint-md/node_modules
