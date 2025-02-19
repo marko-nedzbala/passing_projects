@@ -30,10 +30,6 @@ Need:
 nvm install allows you to easily switch between versions
 https://github.com/nvm-sh/nvm#installing-and-updating
 
-HTML Forms
-https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Your_first_form
-
-
 
 Part 1
 Introduction to React
