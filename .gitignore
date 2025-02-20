@@ -104,3 +104,4 @@ db.sqlite3
 /tools/clang-format/node_modules
 /tools/eslint/node_modules
 /tools/lint-md/node_modules
+node_modules

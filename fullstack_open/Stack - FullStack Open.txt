@@ -138,6 +138,8 @@ Event Handling
 // this is for simple event handlers
 const App = () => {
    const [counter, setCounter] = useState(0);
+   //counter is assigned the initial value of state
+   //setCounter() is assigned a function that will be used to modify the state
 
     return (
     <div>
@@ -163,6 +165,10 @@ const App = () => {
     </div>
   )
 }
+
+An event handler is supposed to be either:
+1.) a function
+2.) a function reference
 
 Passing state - to child components
 
