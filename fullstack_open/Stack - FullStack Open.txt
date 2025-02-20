@@ -108,6 +108,8 @@ https://egghead.io/
 Part C
 Component state, event handlers
 
+This is an excellent section on event handlers and using them with React
+
 do not have to assign entire props object into a variable
 const Hello = (props) => {
     const { name, age } = props;
