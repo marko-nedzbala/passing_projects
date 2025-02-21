@@ -205,12 +205,15 @@ when the application starts, code in App is executed, the event handler changes 
 Part D
 A more complex state, debugging React apps
 
+It is forbidden in React to mutate state directly, it can result in unexpected side effects. Changing state has to always be done by setting the state to a new object
+
 changing state has to be done by setting the state to a new object
 
 Conditional rendering: a components renders completely different React elements depending on the state of the application
 
 React hooks, like useEffect, can only be called inside a function
 
+Event handlers must always be a function or a reference to a function
 event handler is not a function, but a variable assignment
 this is allowed
 <button onClick={() => console.log('clicked the button')}>Click me</button>
@@ -220,7 +223,7 @@ https://egghead.io/
 
 
 Part 2
-Rendering a collection, modules
+Communicating with server
 
 Part A
 Rendering a collection, modules
