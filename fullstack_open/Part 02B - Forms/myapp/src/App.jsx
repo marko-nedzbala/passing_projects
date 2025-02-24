@@ -41,7 +41,15 @@ function App(props) {
       name: newName,
       id: String(persons.length + 1),
     }
-    setPersons(persons.concat(nameObject));
+    // console.log(persons.includes(nameObject.name))
+    console.log(persons.name === nameObject.name);
+    console.log('Persons: ', persons.name);
+    if (persons.find(person => person.name === newName)) {
+      alert(`${newName} already exists`);      
+    } else {
+      setPersons(persons.concat(nameObject));
+    }
+    
     setNewName('');
   }
 
