@@ -1,0 +1,327 @@
+
+
+
+Part I Game Design and Paper Prototyping Chapters 1 to 15
+Part II Programming C# in Unity Chapters 16 to 28
+Part III Game Prototype Tutorials Chapters  29 to 36
+Part IV Next Steps Chapters 37 to 38
+
+https://book.prototools.net/
+
+Uses Unity 2020.3 LTS
+
+Other books:
+    Game Design Workshop by Tracy Fullerton
+    The Art of Game Design by Jesse Schell
+    Advanced Game Design: A Systems Approach by Michael Sellers
+    A Playful Production Process: For Game Designers (and Everyone) by Richard Lemarchand
+    Games, Design and Play by Colleen Macklin and John Sharp
+    Level Up! by Scott Rogers
+    Imaginary Games by Chris Bateman
+    The Grasshopper by Bernard Suits
+    Game Design Theory by keith Burgun
+
+
+
+Chapter01
+Thinking Like a Designer
+
+Deblocking: the term for strategies used to break up blocks of cards
+
+Asking the right questions
+    Is the game of the appropriate difficulty for the intended audience?
+    Is the outcome of the game based more on strategy or chance?
+    Does the game have meaningful, interesting decisions?
+    Is the game interesting when it's not your turn?
+
+Modifying the Rules
+1.) Incrementally modify the rules, changing very few things between each playtest.
+2.) Playtest the game with the new rules.
+3.) Analyze how the feel of the game is altered by the new rules.
+4.) Design new rules that you think might move the feel of the game in the direction you want.
+5.) Repeat this process until you're happy with the game.
+
+Bernard Suits' Definition of a game
+"To play a game is to attempt to achieve a specific state of affairs, using only means permitted by rules, where the rules prohibit use of more efficient in favor of less efficient means, and where the rules are accepted just because they make possible such acitivity"
+
+Iterative design and incremental
+
+Game "Passage"
+
+Lusory attitude: the attitude of one who willingly takes part in playing a game
+
+
+
+Chapter02
+Game Analysis Frameworks
+
+Ludology: the study of games and game design
+
+Common Frameworks for Ludology
+    MDA
+    Formal, Dramatic, and Dynamic Elements
+    Elemental Tetrad
+
+MDA
+Mechanics: the particular components of the game at the level of data representation and algorithms. Rules of the game and how the player interactions are designed.
+Dynamics: the runtime behavior of the mechanics acting on player inputs and each other's outputs over time. The actual actions that take place during gameplay as as result of mechanics.
+Aesthetics: the desirable emotional responses evoked in the player when they interact with the game system. How the players feel during and after playing the game.
+
+Formal, Dramatic, and Dynamic Elements
+1.) Formal elements: the eleents that make games different from other forms of media or interaction and provide structure of a game. Rules, resources and boundaries.
+2.) Dramatic elements: the story and narrative of the game, including the premise.
+3.) Dynamic elements: the game in motion.
+
+1.) Formal elements
+elements that differentiate games form other forms of media:
+    1.) Player interaction pattern
+    2.) Objective
+    3.) Rules
+    4.) Procedures
+    5.) Resources
+    6.) Boundaries
+    7.) Outcome
+
+2.) Dramatic elements
+    1.) Premise
+    2.) Character
+    3.) Story
+
+3.) Dynamic elements
+    1.) Emergence: how rules unfold during play
+    2.) Emergent narrative
+    3.) Playtesting is the only way to understand dynamics
+
+Elemental Tetrad
+
+Mechanics: the rules for interaction between the player and the game.
+Aesthetics: describe how the game is perceived by the 5 senses
+Technology: the technology that makes the game work
+Story: encompasses all of the narrative elements in your game
+
+
+
+Chapter03
+The Layered Tetrad
+
+help you understand and create the various aspects of a game
+
+3 layers:
+1.) Inscribed
+2.) Dynamic
+3.) Cultural
+
+Inscribed layer
+1.) Mechanics: systems that define how the player and the game will interact
+2.) Aesthetics: how the game looks, sounds, smells, tastes and feels
+3.) Technology
+4.) Narrative
+
+The dynamic layer emerges through gameplay
+1.) Mechanics
+2.) Aesthetics
+3.) Technology
+4.) Narrative
+
+The Cultural Layer
+1.) Mechanics
+2.) Aesthetics
+3.) Technology
+4.) Narrative
+
+
+
+Chapter04
+The Inscribed Layer
+
+Inscribed Aspects
+1.) Mechanics
+2.) Aesthetics
+3.) Narrative
+4.) Technology
+
+Inscribed Mechnaics
+
+Inscribed Mechanical Elements:
+Objectives: the goals of the players in the game
+Player Relationships: define the ways that players combat and collaborate with each other and the game
+Rules: specify and limit player actions
+Boundaries: define the limits of the game and relate directly to the magic circle
+Resources: include assets/values that are relevant within the boundaries of the game
+Spaces: define the shape of the game space and the possibilities for interaction therein
+Tables: define the statistical shape of the game
+
+Components of Inscribed Narrative
+    Premise
+    Setting
+    Character
+    Plot
+
+Five-Act Structure
+by German writer Gustav Freytag, Freytag's pyramid
+Act I: Exposition
+Act II: Rising Action
+Act III: Climax
+Act IV: Falling Action
+Act V: Denouement
+
+
+Three-Act Structure
+American screenwriter Syd Field
+between each act, a plot point changes the direction of the story and forces the characters' actions
+Act I: Hook, Inciting Incident, 1st Plot Point
+Act II: 2nd Plot Point
+Act III: Climax
+
+
+
+Chapter05
+The Dynamic Layer
+
+Richard Bartle
+1996 article "Hearts, Clubs, Diamonds, Spades: Players Who Suit MUDs"
+
+Procedural Art
+Unity 3D
+VFX graph, Shader graph
+
+Procedural Music
+Audiokinetic's Wwise
+Firelight Technologies' FMOD
+
+technologies behind it:
+Horizontal Re-Sequencing (HRS): rearranges the order of several precomposed sections of music
+Vertical Re-Orchestration (VRO): includes recordings of various tracks of a single song that is enabled/disabled
+Procedural COmposition (PCO): rarest form, takes the most time and skill to create, the computer program composes music from individual notes based on programmed rules of composition
+
+Procedural Art
+Particle systems
+Procedural animation: animation blending, mixing several different key-framed animations into a semi-procedural animation that fits the situation, Unity uses Blend Trees
+Shader: code that tells you graphics card to turn scene data into an actual image
+Procedural environments
+
+High Dynamic Range (HDR): lighting to simulate the human eye's ability to adjust to brighter and darker environments
+
+Color blindness app to simulate being colorblind and testing purposes
+Chromatic Vision Simulator by Kazunori Asada
+
+
+
+Chapter06
+The Cultural Layer
+
+
+
+Chapter07
+Acting Like a Designer
+
+4 phases of the iterative process of design are:
+1.) Analysis
+2.) Design
+3.) Implementation
+4.) Testing
+
+Brainstorming and Ideation
+Step 1: Expansion Phase
+write any idea you have on a whiteboard
+
+Step 2: Collection Phase
+collect all the nodes and write them down on 3x5 cards, known as the idea cards. Combining 2 different ideas and getting a joke
+
+Step 3: Collision Phase
+deal 2 cards to each person, then the group comes up with 3 different games ideas inspired by the collision of the 2 cards
+
+Step 4: Rating Phase
+start culling ideas, each person puts a mark next to the 3 ideas they like the most
+
+Step 5: Discussion
+continue and the culling process by modifying and combining several of the ideas with the highest rating
+
+Standard process
+Ideation: where you experiment to your heart's content
+Preproduction: experimenting with different prototypes
+Production
+Alpha
+Beta
+Gold
+Post-release
+
+Scoping
+OverScoping is a major problem
+Overscoping is the number one killer of game projects
+
+IndieCade Game Festival
+gives a good idea
+http://indiecade.com
+
+Scope Management via Preproduction Deliverables
+Mark Cerny 2002 D.I.C.E summbit
+macro level of design that can (and must) be done in preproduction from the the micro level of design that cannot happen before the production phase
+
+components:
+Vertical Slice:
+    The Three Cs
+        1.) Character
+        2.) Camera
+        3.) Control
+
+The look of the game
+Key technology
+Two game levels of pubishable quality
+
+
+
+Chaper08
+Design Goals
+
+Autotelic, Latin words for self(auto) and goal (telos)
+people who enjoy setting their own goals and are usually able to find happiness in life regardless of situation
+
+
+
+Chapter09
+Paper Prototying
+
+Hexagonal board: shows an accurate representation of distances and movements
+
+
+
+Chapter10
+Game Testing
+
+
+
+Chapter11
+Math and Game Balance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
