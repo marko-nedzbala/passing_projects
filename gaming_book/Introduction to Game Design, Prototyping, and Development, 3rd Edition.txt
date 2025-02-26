@@ -294,23 +294,62 @@ Game Testing
 Chapter11
 Math and Game Balance
 
+More dice with less range make the game less about chance
+1d20 is more chaotic then 3d6
+
+nanDECK www.nand.it/nandeck
+allows the building of cards online
+
+Affinity Publisher
+paid alternative to Adobe
+
+"<>" means different from
+100 "<>" 12 # 100 different from 12
+100 "<>"    # 100 different from nothing
 
 
 
+Chapter12
+Guiding the Player
+
+Direct Guidance:
+    Immediacy
+    Scarcity
+    Brevity
+    Clarity
+
+Methods of Direct Guidance
+    Instructions
+    Call to Action
+    Map or guidance system
+    Pop-ups
+
+Indirect Guidance
+    Constraints
+    Goals
+    Physical Interface
+    Visual Design: Light, Similarity, Trails, Landmarks, Arrows, Camera
+        Contrast: Brightness, Texture, Color, Directionality
+    Audio Design
+    Player Avatar
+    Non-Player Characters
+    Modeling Behavior: Negative behavior, Positive behavior, Safety
+    Emotional Connections
+    Teaching New Skills and Concepts
+
+Sequencing: the art of gently presenting new information to the new player
+    Isolated introduction
+    Expansion
+    Adding danger
+    Increased difficulty
+    Integration
+
+Kya: Dark Lineage
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+Chapter13
+Puzzle Design
 
 
 
