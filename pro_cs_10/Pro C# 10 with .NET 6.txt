@@ -1,0 +1,259 @@
+
+https://github.com/apress/pro-c-sharp-10
+
+
+PART I - INTRODUCING C# AND .NET 6
+Chapter01
+Introducing C# and .NET 6
+
+The 5 types of the Common Type System
+1.) CTS Class Types
+2.) CTS Interface Types
+3.) CTS Structure Types
+4.) CTS Enumeration Types
+5.) CTS Delegate Types
+
+Global Using Statements
+
+global using System;
+
+must come before any non-global using statements
+can also be placed in the project file of the application
+<ItemGroup>
+    <Using Include="System.Text" />
+</ItemGroup>
+
+implicit global using statements, imports namespaces based on the type of project you are building
+
+
+
+Chapter02
+Building C# Applications
+
+$ dotnet
+Options
+--version           Display the .NET SDK version
+--info              Display .NET information
+--list-runtimes     Display the installed runtimes
+--list-sdks         Display the installed SDKs
+
+3 runtimes
+Microsoft.AspNetCore.App        ASP.NET Core
+Microsoft.NETCore.App           Foundation runtime for .NET
+Microsoft.WindowsDesktop.App    WinForms and WPF
+
+$ dotnet sdk check
+
+https://learn.microsoft.com/en-us/dotnet/csharp/
+https://learn.microsoft.com/en-us/dotnet/fundamentals/
+
+
+
+PART II - CORE C# PROGRAMMING
+Chapter03
+Core C# Programming Constructs, Part 1
+
+application object: the class that defines the Main()
+
+using System.Numerics;
+BigInteger
+
+Pattern matching improvements
+Pattern                     Meaning in Life
+Type patterns               Checks if a variable is a type
+Parenthesized patterns      Enforces or emphasizes the precedence of pattern combinations
+Conjuctive (and) patterns   Requires both patterns to match
+Disjunctive (or) patterns   Requires either pattern to match
+Negated (not) patterns      Requires a pattern does not match
+Relational patterns         Requires input to be less than, less than or equal, greater than, or greater than or equal
+Pattern combinator          Allows multiple patterns to be used together
+
+
+
+Chapter04
+Core C# Programming Constructs, Part 2
+
+Indices and Ranges
+System.Index: represents an index into a sequence
+System.Range: represents a subrange of indices
+
+range operator .. specifies the start and end of a range as its operands
+example
+int[] ind = new int[5];
+Range r1 = 1..3; //the end of the range is exclusive
+foreach (int i in ind[r1])
+{
+    Console.WriteLine(ind[i]);
+}
+
+Console.WriteLine();
+
+Range r2 = 3..5;
+foreach (int i in ind[r2])
+{
+    Console.WriteLine(ind[i]);
+}
+
+end operator ^ specifies the index relative to the end of the sequence
+example
+int[] ind = new int[5];
+Console.WriteLine(ind[^1]); //the beginning
+Console.WriteLine(ind[^4]); //the end
+
+Methods
+C# parameter modifiers
+Parameter Modifier      Meaning
+(None)                  the default, passed by value
+out                     assigned by the method being called, passed by reference
+ref                     assigned by the caller, may be modified by the called method
+in                      a ref parameter that is read-only by the called method
+params                  allows sending a variable number of arguments as single logical parameter
+
+
+
+
+
+PART III - OBJECT ORIENTED PROGRAMMING WITH C#
+
+Chapter05
+Understanding Encapsulation
+
+Constructors
+
+constructor chaining
+use a "master constructor" the constructor that takes the greatest number of arguments, have its implementation perform the required validation logc, the remaining constructors can make use of the this keyword to forward the incoming arguments to the master constructor and provide any additional parameters as necessary
+
+//example
+class MyClass
+{
+    public int Age;
+    public string Name;
+
+    public MyClass() {}
+    public MyClass(int age)
+        : this(age, "") {}
+    public MyClass(string name)
+        : this(0, name) {}
+
+    // the "master constructor"
+    public MyClass(int age, string name)
+    {
+        if (age > 1_000)
+        {
+            age = 0;
+        }
+        Age = age;
+        Name = name;
+    }
+}
+
+can also use optional parameters, will implement a similar result
+
+Constructor Flow
+1.) You create your object by invoking the needed constructor
+2.) The called constructor forwards the supplied data to the master constructor and provides any additional startup argumnets not specified by the caller
+3.) The master constructor assigns the incoming data to the object's field data
+4.) Control is returned to the constructor originally called and executes any remaining code statements
+
+Static
+defining static field data
+define instance-level data: every time you create a new object, the object maintains its own independent copy of the data
+define static data of a class: the memory is shared by all objects of that category
+
+can define a static constructor
+class MyClass
+{
+    static MyClass()
+    {
+        // code
+    }
+}
+
+Important considerations about static constructors
++ a given class may define only a single static constructor, cannot be overloaded
++ does not take an access modifier and cannot take any parameters
++ executes exactly one time, regardless of how many objects of the type are created
++ the runtime invokes the static constructor when it creats an instance of the class or before accessing the first static memeber invoked by the caller
++ the static constructor executes before any instance-level constructors
+
+static import
+using static System.Console;
+// to use
+WriteLine("It is so");
+
+Access modifiers
+public
+private
+protected
+internal
+protected internal
+private internal: the item is accessible within the defining class and by dervied classes in the same assembly
+
+Default access modifiers
+type members are implicitly --> private
+types (classes) are implicitly --> internal
+
+Extended Property Patterns, lookup from C# 10.0 onwards
+
+init-only setters, C# 9.0
+these setter enable a proprty to have its value set during initialization, but after construction is complete on the object, the property becomes read-only
+
+//example
+class Example
+{
+    public int X { get; init; }
+    public int Y { get; init; }
+}
+
+Page 292
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
