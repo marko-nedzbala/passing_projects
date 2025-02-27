@@ -14,11 +14,20 @@ function App() {
       .get('http://localhost:3001/notes')
       .then(response => {
         console.log('promise fulfilled');
-        setNotes(response.data)
+        setNotes(response.data);
       })
   };
 
-  useEffect(hook, []);
+  // useEffect(hook, []);
+
+  const hook2 = () => {
+    axios
+      .get('https://localhost:3001/numbers')
+      .then(response => {
+        setNotes(response.data);
+      });
+  }
+  useEffect(hook2, []);
 
   console.log('render', notes.length, 'notes');
   
