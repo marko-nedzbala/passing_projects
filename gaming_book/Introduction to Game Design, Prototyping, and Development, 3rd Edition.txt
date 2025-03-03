@@ -22,6 +22,7 @@ Other books:
     Game Design Theory by keith Burgun
 
 
+PART I - GAME DESIGN AND PAPER PROTOTYPING CHAPTERS
 
 Chapter01
 Thinking Like a Designer
@@ -350,6 +351,94 @@ Kya: Dark Lineage
 
 Chapter13
 Puzzle Design
+
+"A puzzle is fun, and has a right answer"
+
+
+
+Chapter14
+The Agile Mentality
+
+
+
+Chapter15
+The Digital Game Industry
+
+Entertainment Software Association (ESA)
+ESA Essential Facts
+
+
+
+
+
+PART II - PROGRAMMING C# IN UNITY
+
+Chapter16
+Thinking in Digital Systems
+
+
+
+Chapter17
+Introducing Unity HUB and The Unity Editor
+
+
+
+Chapter18
+Introducing Our Language: C#
+
+
+
+Chapter19
+Hello World: Your First Program
+
+Starting a new project:
+1.) Use the Project Template -> 3D Core Template
+2.) Recommends using the WebGL build and use 1280x720 resolution
+
+https://www.photopea.com/
+
+Game Objects
+Transform component sets the:
+1.) Position
+2.) Rotation
+3.) Scale of the GameObject
+the only component that is required in every GameObject
+
+Mesh Filter component: gives the GameObject is 3-dimensional shape
+
+Box Collider: enable a GameObject to interact with other objects in the physics simulation, the PhysX Physics engine
+
+Mesh Renderer: makes the geomety visible
+
+Material: a small editor to show the details of the material
+
+Rigidbody: allos physics to be simulated for the GameObject
+
+If a variable is public, it will appear in the Inspector pane
+
+
+
+Chapter20
+Variables and Components
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
