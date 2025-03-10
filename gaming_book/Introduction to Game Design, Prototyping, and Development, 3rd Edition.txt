@@ -421,14 +421,29 @@ If a variable is public, it will appear in the Inspector pane
 Chapter20
 Variables and Components
 
+Some useful libraries
+Mathf: a math library
+Screen: information about the screen
+Application: information about the context in which Unity is running
+SystemInfo: information aboute the device
+
+GameObject
+everything in Unity is a gameObject, some aspects of GameObject
+-Transform: a mandatory component present on all GameObjects, Position, Rotation, Scale
+-MeshFilter: attaches a 3D mesh to a GameObject
+-Renderer: draws a model on the screen, requires a MeshFilter to provide 3D mesh data, also requires a Material
+-Collider: the physical presency of the GameObject
+-Rigidbody: controls the physics simulation of the 3D GameObject, simulates acceleration and velocity every FixedUpdate to update the position and rotation of the Transform componenet over time. isKinematic: will collide with other Rigidbodies, but will not be moved by a collision
 
 
 
+Chapter21
+Boolean Operations and Conditionals
 
 
 
-
-
+Chapter22
+Loops
 
 
 

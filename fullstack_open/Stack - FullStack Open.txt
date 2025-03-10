@@ -344,11 +344,56 @@ Altering data in server
 
 resources: data objects, and every resource has a unique address associated with it, a URL
 
+Content-Type: application/json
+
+Code to add items to your DOM
 
 
 
 
+const App = () => {
+    const [objs, setObjs] = useState([]);
+    const [newObj, setNewObj] = useState('')
 
+    const myAdd = (event) => {
+        event.preventDefault();
+        const myObj = {
+        content: newObj,
+        more: true
+        }
+
+        const request = axios.post('http://localhost:3001/notes', myObj);
+        request.then(response => response.data).then(ret => {
+        setObjs(objs.concat(ret));
+        setNewObj('');
+        console.log(objs)
+        });
+    }
+
+    const handleMyChange = (event) => {
+        setNewObj(event.target.value);
+    }
+
+    return (
+        <>
+            <ul>
+                {objs.map(ob => (
+                <li key={ob.id}>{ob.content}</li>
+                ))}
+            </ul>
+
+            <form onSubmit={myAdd}>
+                <input value={newObj} onChange={handleMyChange}/>
+                <button type="submit">My Save</button>
+            </form>
+        </>
+    )
+}
+
+
+
+Part E
+Adding styles to React app
 
 
 
