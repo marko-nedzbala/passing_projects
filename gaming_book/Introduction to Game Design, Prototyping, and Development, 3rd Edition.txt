@@ -457,6 +457,55 @@ Funcations and Parameters
 
 
 
+Chapter25
+Debugging
+
+MacOS force quit
+Command+Option+Esc
+
+
+
+Chapter26
+Classes
+
+Do not use any input method that ends with ...Down() or ...Up() inside of FixedUpdate()
+
+Unity Documentation to debug graphics
+GPU Instancing
+MaterialPropertyBlock
+Frame Debugger
+
+
+
+Chapter27
+Object-Oriented Thinking
+
+
+
+Chapter28
+Data-Oriented Design
+
+data-oriented design focuses on data locality: getting the right data in the right place for the porcessor to handle it efficiently
+
+Unity3D achieves this by:
+1.) C# Job System
+2.) Burst Compiler
+3.) Entity Component System (ECS)
+
+it might be worth "printing" this chapter for later reference
+
+
+
+
+
+PART III - GAME PROTOTYPE TUTORIALS
+Chpater29
+Apple Picker
+
+
+
+
+
 
 
 
