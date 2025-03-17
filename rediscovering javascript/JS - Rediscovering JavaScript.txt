@@ -50,6 +50,30 @@ PART II - NICE ADDITIONS
 Chapter04
 Iterators and Symbols
 
+looping
+for elements
+for(const item of my_array) {
+    // code
+}
+
+Getting the index
+for(const entry of names.entries()) {
+    console.log(entry);
+}
+
+or also getting the index, values
+for(const [i, name] of names.entries()) {
+    console.log(i + '--' + name);
+}
+
+Symbol
+
+
+
+
+
+
+
 
 
 
