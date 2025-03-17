@@ -1,0 +1,158 @@
+
+Started Sunday March 16, 2025 at 7:32 PM
+
+
+
+PART I - THE SAFE ALTERNATIVES
+Chapter01
+JavaScript Gotchas
+
+JavaScript has Automatic SemiColon Insertion (ASI) rules
+
+ESLint
+$ npm install -g eslint
+$ eslint --init
+
+$ npm install eslint
+$ eslint --init
+
+to use: $ eslint myfile.js
+
+
+
+Chapter02
+Variables and Constants
+
+const sam = Object.freeze({ first: 'Sam', age: 2 });
+sam.age = 3;
+console.log(sam);
+
+// this will freeze our object, but only a shallow freeze
+
+
+
+Chapter03
+Working with Function Arguments
+
+the rest parameter: the receiving end of a function
+gather discrete values into an array
+const myFunction = function(...values) { //code }
+
+the spread operator: the calling side of the function
+breaks a collection into discrete values
+myFunction(...myArray);
+
+
+
+
+
+PART II - NICE ADDITIONS
+Chapter04
+Iterators and Symbols
+
+
+
+
+
+
+Chapter05
+Arrow Functions and Functional Style
+
+
+Chapter06
+Literals and Destructuring
+
+
+
+
+
+
+PART III - OO AND MODULAR CODE
+Chapter07
+Working with Classes
+
+Chapter08
+Using Inheritance
+
+Chapter09
+Using Modules
+
+
+
+PART IV - GOING META
+Chapter10
+Keeping Your Promises
+
+Chapter11
+Exploring Metaprogramming
+
+Chapter12
+Deep Dive into Metaprogramming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
