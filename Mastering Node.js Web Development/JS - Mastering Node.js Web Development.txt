@@ -1,0 +1,421 @@
+
+https://github.com/PacktPublishing/Mastering-Node.js-Web-Development
+
+npm install @types/node --save-dev
+
+Load developer tools Chrome
+alt + command + i
+
+
+PART I - PUTTING NODE.JS IN CONTEXT
+Chapter01
+Getting Ready
+
+Chapter02
+Woring with the Node.js Tools
+
+NPM commands
+npm init        creates a package.json, keeps track of a project's packages
+npm install     adds a package to the package, --save-dev for packages during development, not part of the app
+npm list        lists all the packages part of the project, --all includes dependencies
+npm audit       reports security vulnerabilities that have reported
+npm start       executes the start script in package.json
+npm stop        executes the stop script in package.json
+npm restart     executes the restart script in package.json
+npm test        executes the test script in package.json
+npm run         executes custom commands in package.json
+npx             executes a package
+
+Versioning
+$ npm confiig set save-exact false
+
+Name    Description
+*                   accepts any version of the package to be installed
+5.3.0               will accept only the package with exact matching version number
+>5.3.0 or >=5.3.0   any version of the package that is greater or equal to a given version
+<5.3.0 or <=5.3.0   any version of the package that is less then or equal to a given version
+~5.3.0              versions even if the patch level number (the last 3rd number) doesn't match
+                    so ~5.3.0 will accept version 5.3.1 or 5.3.2, not 5.4.0
+^5.3.0              version if the minor replease number (the 2nd number) doesn't match
+                    so ^5.4.0 to 5.5.0, but not 6.0.0
+
+Custom commands
+"scripts": {
+    "go": "tsc message.ts && node message.js"
+}
+
+commands separated by:
+    && are executed sequentially
+    & are executed in parallel
+
+
+
+Chapter03
+JavaScript and TypeScript Primer
+
+Development tools to install
+$ npm install nodemon@2.0.20
+$ npm install tsc-watch@6.0.4
+$ npm install typescript@5.2.2
+$ npm install @tsconfig/node20@20.1.4
+$ npm install @tsconfig/node20@20.1.4
+
+$ npm install @types/node --save-dev
+
+Every value is truthy except: false 0 -0 "" null undefined NaN
+
+Nullish coalescing operators
+//looks only for null or undefined values
+let coalesced1 = val1 ?? 'fallback value';
+
+Optional chaining operators
+need to guard against null or undefined values before they can used
+count?.propertyName;
+
+Optional parameter
+function myFunc(val?) {...}
+val?
+
+Module resolution
+relative module: import { Name, WeatherLocation } from './modules';
+nonrelative module, uses node_modules: import { express } from 'express';
+
+
+
+Chapter04
+Understanding Node.js Concurrency
+
+create a TS JSON file
+tsconfig.json
+
+{
+    "extends": "@tsconfig/node20/tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+    }
+}
+
+package.json
+"scripts": {
+    "start": "tsc-watch --onsuccess \"node dist/server.js\""
+},
+
+Multi-thread execution
+1.) new HTTP request arrives
+2.) request gets added to the queue, it waits until one of threads is avaiable to process it
+3.) thread processes the request
+4.) sends the response back to the client
+5.) returns to the queue for the next request
+
+non-blocking and asynchronous are from the perspective of the handler thread, the handler thread can do other work during the waiting period
+
+Node.js uses native threads, the worker pool, to perform options asynchronously
+
+events: provide notifications that the state of the application has changed and provide an opportunity to execute a callback function to handle
+
+const data: Buffer = await readFile('data.json');
+// example of a callback
+res.end(data, () => console.log('File sent'));
+
+Node.js APIs to allow promises and callbacks to be mixed
+promisify: this function creates a Promise from a function that accepts a conventional callback
+callbackify: this function accepts a Promise object and returns a function that will accept a conventional callback
+
+__filename: the file name of the current module
+__dirname: name of the directory that contains the current module
+
+
+
+Chapter05
+Handling HTTP Requests
+
+Listening for HTTP requests
+createServer() in the http module is used to create Server objects that can be used to listen for and process HTTP requests
+useful server methods/properties
+    listen(port)
+    close()
+    requestTimeout
+
+useful server events
+    listening
+    request
+    error
+
+createServer() takes 2 arguments:
+1.) configuration object
+    IncomingMessage property: specifies the class use to represent requests
+    ServerResponse property: specifies the class use to represent response
+    requestTimeout: specifies the amount of time, MS, allowed for a client to send requests, default is 300K MS
+2.) request-handling function
+    invoked when an HTTP request has been received
+// omits the configuration object, the default types will be used to represent
+export const handler = async (req: IncomingMessage, resp: ServerResponse) => {
+    resp.end('Hello world');
+};
+
+HTTP requests
+has 4 parts:
+1.) HTTP method: describes the operation the client wants to perform
+2.) URL: identifies the resource the request should be applied to
+3.) Headers: provide additional information about the request and the capabilities of the client
+4.) Request body: provides the data required for the requested operation
+
+export const handler = async (req: IncomingMessage, resp: ServerResponse) => {
+    console.log(`---- HTTP Method: ${req.method}, URL: ${req.url}`);
+    console.log(`host: ${req.headers.host}`);
+    console.log(`accept: ${req.headers.accept}`);
+    console.log(`user-agent: ${req.headers['user-agent']}`);
+
+    resp.end('Hello world');
+};
+
+Parsing URLs
+URL properties
+hostname        returns a string containing the URL hostname component
+pathname        returns a string containing the URL pathname component
+port            returns a string containing the URL port componenet, will be empty if the request uses the default
+                such as port 80
+protocol        returns a string containing the URL protocol component
+search          returns a string containing the entire query portion of the URL
+searchParams    returns URLSearchParams objects that provides key/value access to the query portion of the URL
+
+import { URL } from 'url';
+export const handler = async (req: IncomingMessage, resp: ServerResponse) => {
+
+    const parsedURL = new URL(req.url ?? '', `http://${req.headers.host}`);
+    console.log(`protocol: ${parsedURL.protocol}`);
+    console.log(`hostname: ${parsedURL.hostname}`);
+    console.log(`port: ${parsedURL.port}`);
+    console.log(`pathname: ${parsedURL.pathname}`);
+    parsedURL.searchParams.forEach((val, key) => {
+        console.log(`Search param: ${key}: ${val}`);
+    });
+
+    resp.end('Hello world');
+};
+
+HTTP responses
+https://nodejs.org/api/http.html
+
+From now on, he lists these parts out, feels like I'm rewriting documentation
+
+HTTPS Requests
+https://letsencrypt.org
+
+self-signed certificate
+page 147 to page 153
+
+Installing Express package
+$ npm install express@4.18.2
+$ npm install --save-dev @types/express4.17.20
+
+Express router
+separates request matching from generating response
+
+
+
+Chapter06
+Using Node.js Streams
+
+Streams:
+1.) a sequence of data values: data arrives in the same order it was written
+2.) data values can be written over time, so the writer doesn't have to have all the data ready before the first value is written
+
+APIs
+Writable
+Readable
+
+Data buffering
+flushed the data: each time the stream processes a chunck of data
+drained: the stream buffer is drained when all the data in the stream's buffer has been processed
+high-water mark: the amount of data that can be stored in the buffer
+
+the ideal approach is to write data to a stream until its buffer is full and then wait until that data is flushed before further data is written, write() returns a boolean value that indicates whether the stream can receive more data without expanding its buffer beyond its target high-water mark
+
+//this will notify us when the buffer is full
+for (let i = 0; i < 10_000; i++) {
+    if(resp.write(`Message: ${i}\n`)) {
+        // resp.write(`Message: ${i}\n`);
+        console.log('Stream buffer is at capacity');
+    }
+}
+
+//avoid excessive data buffering
+export const basicHandler = (req: IncomingMessage, resp: ServerResponse) => {
+
+    resp.setHeader('Content-Type', 'text/plain');
+
+    let i = 0;
+    let canWrite = true;
+
+    const writeData = () => {
+        console.log('Started writing data');
+        do {
+            canWrite = resp.write(`Message: ${i++}\n`);
+        } while ( i < 10_000 && canWrite);
+        console.log('Stream buffer is at capacity');
+        if (i < 10_000) {
+            resp.once('drain', () => {
+                console.log('Buffer has been drained');
+                writeData();
+            });
+        } else {
+            resp.end('End');
+        }
+    }
+    writeData();
+};
+
+Transforming data
+Transform class is used to create objects, known transformers, that receive data from a Readable stream, process it in some way and then pass it on, applied with the pipe method
+
+middleware components: request handlers that can ispect and intercept all the HTTP requests the server receives
+
+
+
+Chapter07
+Using Bundles And Content Security
+
+Modern web development requires 3 key componenets:
+1.) the backend server
+2.) the client-side application
+3.) the browser
+
+Bundlers
+$ npm install --save-dev webpack@5.89.0
+$ npm install --save-dev webpack-cli@5.1.4
+$ npm install --save-dev npm-run-all@4.1.5
+
+creating stand-alone bundles
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Chapter08
+Unit Testing And Debugging
+
+
+PART II - NODE.JS IN DETAIL
+
+Chapter09
+Creating The Example Project
+
+Chapter10
+Using HTML Templates
+
+Chapter11
+Handling Form Data
+
+Chapter12
+Using Databases
+
+Chapter13
+Using Sessions
+
+Chapter14
+Creating RESTful Web Services
+
+Chapter15
+Authenticating And Authorizing Requests
+
+
+PART III - SPORTSSTORE
+Chapter16
+SportsStore: A Real Application
+
+Chapter17
+SportsStore: Navigation And Cart
+
+Chapter18
+SportsStore: Orders And Validation
+
+Chapter19
+SportsStore: Authentication
+
+Chapter20
+SportsStore: Administration
+
+Chapter21
+SportsStore: Deployment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

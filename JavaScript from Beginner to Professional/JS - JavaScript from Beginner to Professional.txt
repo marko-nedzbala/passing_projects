@@ -1,0 +1,213 @@
+
+https://github.com/PacktPublishing/JavaScript-from-Beginner-to-Professional
+
+Chapter01
+Getting Started with JavaScript
+
+Chapter02
+JavaScript Essentials
+
+Chapter03
+JavaScript Multiple Values
+
+Chapter04
+Logic Statements
+
+Chapter05
+Loops
+
+for loops
+for (let i = 0; i < 10; i++) { ... }
+
+for-of loop: used for arrays, does not change the values in the array
+for (let variableName of myArray) { ... }
+
+for-in loop: used to loop over an object
+for (let prop in myObject) { ... }
+
+Can also loop over an object by converting it to an array
+
+our example object
+let car = {
+    model: 'Golf',
+    make: 'Volkswagen',
+    year: 1999,
+    color: 'black',
+};
+
+// using a for-in loop
+for (let prop in car) {
+    console.log(prop);
+}
+
+1.) convert keys of the object to an array
+
+let arrKeys = Object.keys(car);
+console.log(arrKeys);
+
+for (let key of Object.keys(car)) {
+    console.log(key);
+}
+
+2.) convert the values of the object to an array
+
+for(let key of Object.values(car)) {
+    console.log(key);
+}
+
+3.) convert the key-value entries to an array
+
+let arrKeys1 = Object.keys(car);
+for(let i =0; i < arrKeys1.length; i++) {
+    console.log(arrKeys1[i] + ': ' + car[arrKeys1[i]]);
+}
+
+4.) loop over both arrays at the same time
+
+// prints both arrays, return a 2-dimensional array
+let arrEntries = Object.entries(car);
+console.log(arrEntries);
+
+// key-value output
+for(const [key, value] of Object.entries(car)) {
+    console.log(key, ':', value);
+}
+
+
+
+Chapter06
+Functions
+
+Chapter07
+Classes
+
+example of a class
+
+class Person {
+    // private properties
+    #firstname;
+    #lastname;
+
+    constructor(firstname, lastname) {
+        this.#firstname = firstname;
+        this.#lastname = lastname;
+    }
+    greet() {
+        console.log(`Hi ${this.#firstname}`);
+    }
+    // accessors
+    // getter
+    get firstname() {
+        return this.#firstname;
+    }
+    // setter
+    set firstname(firstname) {
+        this.#firstname = firstname;
+    }
+}
+
+let p = new Person('Bob', 'Smith');
+p.greet();
+// set the property
+p.firstname = 'James';
+// get the property
+
+
+
+Chapter08
+Built-In JavaScript Methods
+
+Open Web Application Security Project (OWASP)
+
+
+
+Chapter09
+The Document Object Model
+
+Browser Object Model (BOM): the window browser object
+
+console.dir(window);
+shows a list of all the properties of the specified object
+
+window is a global variable, so we don't need to prefix it to the following variables
+history object: history.go(-1) goes back to the previous page
+navigator: contains information about the browser we are using
+location: get URL of current page
+
+Document Object Model (DOM)
+console.dir(document); allows us to inspect the DOM
+
+Selecting page elements
+querySelector(): selects the first element, if it cannot find it, returns Null
+querySelectorAll(): selects all the elements, returns a NodeList
+
+
+
+Chapter10
+Dynamic Element Manipulation Using the Document
+
+Chapter11
+Interactive Content and Event Listeners
+
+Chapter12
+Intermediate JavaScript
+
+Local Storage
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="stored"></div>
+    <script>
+        let message = 'Hello Storage';
+        localStorage.setItem('example', message);
+
+        if(localStorage.getItem('example')) {
+            document.getElementById('stored').innerHTML = localStorage.getItem('example');
+        }
+    </script>
+</body>
+</html>
+
+
+
+Chapter13
+Concurrency
+
+then() is the Promise itself
+
+let promise = new Promise(function (resolve, reject) {
+    let x = 20;
+    if (x > 10) {
+        resolve(x);
+    } else {
+        reject('Too low');
+    }
+});
+
+promise.then(
+    function (value) {
+        console.log('Success:', value);
+    },
+    function (error) {
+        console.log('Error:', error);
+    }
+);
+
+
+
+Chapter14
+HTML5, Canvas, and JavaScript
+
+a good chapter full of examples for APIs
+come back and review later
+
+
+
+Chapter15
+Next Steps

@@ -211,8 +211,6 @@ PART IV - GOING META
 Chapter10
 Keeping Your Promises
 
-The examples displays it really well!
-
 const computeSqrtAsync = function(number) {
     if(number < 0) {
         return Promise.reject('no negative number please');
@@ -241,83 +239,83 @@ reportOnPromise(forSixteen);
 
 Chaining Promises
 
-const fs = require('fs');
-const fsPromises = require('fs').promises;
 
-const countLinesWithText = function(pathToFile) {
-    fs.promises.readFile(pathToFile)
-        .then(content => content.toString())
-        .then(content => content.split('\n'))
-        .then(lines => lines.filter(line => line.includes('THIS LINE')))
-        .then(lines => lines.length)
-        .then(count => checkLineExists(count))
-        .then(count => console.log(`Number of lines with THIS LINE is ${count}`))
-        .catch(error => console.log(`ERROR: ${pathToFile}, ${error.message}`));
-};
 
-const checkLineExists = function(count) {
-    if(count === 0) {
-        throw new Error('text does not exist in file');
-    }
-    return count;
-}
 
-countLinesWithText('example.txt');
 
-Multiple Promises
-2 options to deal with multiple asynchronous tasks
-1.) Let the tasks race and pick the first promise that resolves or rejects
-2.) Wait for all the tasks to resolve OR for any one of them to reject
-
-1.) Let the tasks race and pick the first promise that resolves or rejects
-
-const createPromise = function(timeInMillis) {
-    return new Promise(function(resolve, reject) {
-        setTimeout(() => resolve(timeInMillis), timeInMillis);
-    });
-}
-const createTimeout = function(timeInMillis) {
-    return new Promise(function(resolve, reject) {
-        setTimeout(() => reject(`timeone after ${timeInMillis} MS`), timeInMillis);
-    });
-};
-Promise.race([createPromise(1000), createPromise(2000), createTimeout(3000)])
-    .then(result => console.log(`completed after ${result} MS`))
-    .catch(error => console.log(`ERROR: ${error}`));
-Promise.race([createPromise(3500), createPromise(4000), createTimeout(2000)])
-    .then(result => console.log(`completed after ${result} MS`))
-    .catch(error => console.log(`ERROR: ${error}`));
-
-2.) Wait for all the tasks to resolve OR for any one of them to reject
-
-Async and Await
 
 
 
 Chapter11
 Exploring Metaprogramming
 
-metaprogramming comes in 2 flavors:
-1.) Injection: a technique where we can add, replace, specific methods or properties into a class, the names are known at code writing time
-2.) Synthesis: when the method name is not known at code writing time
-
-Dynamic Access
-to find all the members in an instance, Object.keys(myInstance)
-
-// can access property dynamically
-myClass[newPropertyName];
-
-member injection
-property injection
-Object.defineProperty(objectToInjectProperty, 'nameOfProperty', get_setObject);
-
-
-
 Chapter12
 Deep Dive into Metaprogramming
 
-method synthesis
 
-Reflect
 
-Reflect.apply(methodName, parameter01, parameter02);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
