@@ -228,6 +228,9 @@ Communicating with server
 Part A
 Rendering a collection, modules
 
+Creating VS Code Snippets
+https://code.visualstudio.com/docs/editing/userdefinedsnippets#_creating-your-own-snippets
+
 React requires a key-value pair for rendering lists
 {myList.map(x =>
     <li key={note.id}>
@@ -395,28 +398,52 @@ const App = () => {
 Part E
 Adding styles to React app
 
+re-read the 'Couple of important remarks' section
+
+const [myVariable, setVariable] = useState(null);
+useEffect(() => {
+    ...
+}, [myVariable]);
+
+the impact of [myVariable], is the effect function will be executed after the first rnder and always after the table as its second parameter [myVariable] changes
 
 
 
 
 
+Part 2
+Communicating with server
 
+Part A
+Node.js and Express
 
+Modules: import/export statement
+Node.js uses CommonJS modules uses require()
 
+update your libraries
+$ npm update
 
+request parameter: contains all of the information of the HTTP request
+response parameter: used to define how the request is responded to
 
+$ node --watch myFile.js
 
+better to update our package.json
+"scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    ...
+}
 
+$ npm run dev
 
+REST
+objects are resources, every resource has an associated URL, which is the resource's unique address
 
+const id = request.params.id;
+the 'id' is from the object we are passing around
 
-
-
-
-
-
-
-
+LEFT OF https://fullstackopen.com/en/part3/node_js_and_express#deleting-resources
 
 
 
