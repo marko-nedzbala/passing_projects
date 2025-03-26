@@ -475,6 +475,19 @@ app.use(cors());
 
 COME BACK TO THIS
 
+in the frontend
+$ npm run dev
+
+copy the ./dist to the backend
+
+app.use(express.static('dist'))
+
+
+
+
+
+
+
 Pact C
 Saving data to MongoDB
 
@@ -487,6 +500,15 @@ https://www.mongodb.com/try/download/compass
 start MongoDB
 $ mongosh
 
+$ npm install mongoose
+
+
+
+
+
+
+
+LEFT OF https://fullstackopen.com/en/part3/saving_data_to_mongo_db#schema
 
 
 
@@ -517,15 +539,6 @@ $ mongosh
 
 
 
-
-
-
-
-
-
-
-
-LEFT OF https://fullstackopen.com/en/part3/node_js_and_express#deleting-resources
 
 
 
