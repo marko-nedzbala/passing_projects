@@ -1,3 +1,10 @@
+https://github.com/fullstack-hy2020/part3-notes-backend
+
+Cloning a specific branch
+git clone -b <branch> <remote_repo>
+
+git clone -b my-branch git@github.com:user/myproject.git
+
 Part 0
 Fundamentals of Web Apps
 
@@ -442,6 +449,81 @@ objects are resources, every resource has an associated URL, which is the resour
 
 const id = request.params.id;
 the 'id' is from the object we are passing around
+
+VS Code REST plugin of Postman
+./node_modules
+./request
+    myRequest.rest
+
+to access data easily, need Express json-parser
+app.use(express.json())
+
+Part B
+Deploying app to internet
+
+URL's origin is defined by the combination of protocol, hostname and port
+
+the browser checks the Access-Control-Allow-origin, must contain * on the URL of the source HTML for the browser to process the response
+
+Cross-Origin Resource Sharing (CORS)
+
+need to install cors
+$ npm install cors
+
+const cors = require('cors');
+app.use(cors());
+
+COME BACK TO THIS
+
+Pact C
+Saving data to MongoDB
+
+install MongoDB
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+
+MongoDB Compass (GUI)
+https://www.mongodb.com/try/download/compass
+
+start MongoDB
+$ mongosh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 LEFT OF https://fullstackopen.com/en/part3/node_js_and_express#deleting-resources
 
