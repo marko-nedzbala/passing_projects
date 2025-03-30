@@ -311,31 +311,106 @@ index.html
 server.ts
 expressApp.use(express.static('dist/client'));
 
+Install the webpack development HTTP Server
+$ npm install --save-dev webpack-dev-server@4.15.1
 
+there are headers that the backend server can set to provide the browser with insight into how the application works and what behaviors are expected
+the most important header is Content Security Policy (CSP), tells the browser what behaviors to expect from the client-side application so that the browser can block suspicious activity
+intends to prevent Cross-Site Scripting (XSS)
 
+define a content security policy
+expressApp.use((req, resp, next) => {
+    resp.setHeader('Content-Security-Policy', "img-src, 'self'");
+});
+middleware component
 
+list of policies
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
 
+Use a packae to set the policy header
+$ npm install helmet@7.1.0
 
+import helmet from "helmet";
 
-
-
-
-
-
+expressApp.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            imgSrc: "'self'",
+            scriptSrcAttr: "'none'",
+            scriptSrc: "'self'",
+            connectSrc: "'self' ws://localhost:5000"
+        }
+    }
+}));
 
 
 
 Chapter08
 Unit Testing And Debugging
 
+writing unit tests
+arrange/act/assert (A/A/A)
+Arrange: setting up the conditions for the test
+Act: performing the test
+Assert: verifying that the result was the one that was expected
+
+
+
+
 
 PART II - NODE.JS IN DETAIL
-
 Chapter09
 Creating The Example Project
 
+Application packages
+
+npm install bootstrap@5.3.2
+npm install express@4.18.2
+npm install helmet@7.1.0
+npm install http-proxy@1.18.1
+
+Development tool packages
+
+npm install --save-dev @tsconfig/node20
+npm install --save-dev npm-run-all@4.1.5
+npm install --save-dev tsc-watch@6.0.4
+npm install --save-dev typescript@5.2.2
+npm install --save-dev webpack@5.89.0
+npm install --save-dev webpack-cli@5.1.4
+npm install --save-dev webpack-dev-server@4.15.1
+
+Type packages
+
+npm install --save-dev @types/express@4.17.20
+npm install --save-dev @types/node@20.6.1
+
+Use this chapter as the basis for future ones
+
+
+
 Chapter10
 Using HTML Templates
+
+Server-side HTML templates
+three things are required for an HTML template:
+1.) a template file that has placeholder sections into which dynamic content will be inserted
+2.) a data dictionary (context): that provides the values that will determine the specific dynamic content that will be generated
+3.) a template engine: that processes the view and the dictionary to produce an HTML document into which dynamic content has been inserted and which can be used as a response to an HTTP request
+
+rendering: the task of processing a template, occurs entirely in the backend server. Rendering produces a regular HTML document that from the browser perspective appears no different from regular static content
+
+Creating a simple template engine
+Page 281
+
+
+
+
+
+
+
+
+
+
 
 Chapter11
 Handling Form Data
