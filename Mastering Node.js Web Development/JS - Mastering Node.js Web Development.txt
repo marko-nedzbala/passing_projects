@@ -402,9 +402,43 @@ rendering: the task of processing a template, occurs entirely in the backend ser
 Creating a simple template engine
 Page 281
 
+Server-Side Rendering (SSR)
+templates are rendered at the server to create a round-trip version of the application, which can be displayed quickly by the browser, once the server-rendered content is displayed, the browser requests JavaScript code and transitions to a single-page application
+
+Package for server-side templates
+$ npm install handlebars@4.7.8
+$ npm install express-handlebars@7.1.2
+
+import { engine } from "express-handlebars";
+import * as helpers from "./template_helpers";
+
+expressApp.set("views", "templates/server");
+expressApp.engine("handlebars", engine());
+expressApp.set("view engine", "handlebars");
+
+Pakcage for client-side templates
+$ npm install --save-dev handlebars-loader@1.7.3
+
+Need to add this to our webpack file (or just reference it page 306)
+
+module: {
+    rules: [
+        { test: /\.handlebars$/, loader: "handlebars-loader" }
+    ]
+},
+    resolve: {
+        alias: {
+            "@templates": path.resolve(__dirname, "templates/client")
+    }
+}
 
 
-LEFT OFF PAGE 285
+
+Chapter11
+Handling Form Data
+
+
+LEFT OFF PAGE 310
 
 
 
