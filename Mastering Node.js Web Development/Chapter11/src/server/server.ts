@@ -23,7 +23,9 @@ expressApp.set('view engine', 'handlebars');
 expressApp.use(helmet());
 expressApp.use(express.json());
 
+registerFormMiddleware(expressApp);
 registerFormRoutes(expressApp);
+
 
 expressApp.get('/dynamic/:file', (req, resp) => {
     resp.render(`${req.params.file}.handlebars`, {

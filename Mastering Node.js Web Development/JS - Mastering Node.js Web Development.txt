@@ -6,6 +6,9 @@ npm install @types/node --save-dev
 Load developer tools Chrome
 alt + command + i
 
+Format
+Linux: ctrl + shift + i
+
 
 PART I - PUTTING NODE.JS IN CONTEXT
 Chapter01
@@ -439,26 +442,85 @@ module: {
 Chapter11
 Handling Form Data
 
-code to page 315 is already completed
+action attribute element on the form element tells the browser to send the form data to /form
+action="/form"
+
+GET request, Express decodes URL query string and presents them through the Request.query property
+GET requests must be idempotent: every request for a given URL should always have the same effect and always return the same result
+
+POST requests for forms
+Node.js and Express read the headers from the HTTP request and leave the body so that is can be read as a stream
+
+name01=value01+value01&name02=value02
+name=Alice+Smith&city=London
+
+use middleware to decode the Content-Type header and form data into key/value map
+app.use(express.urlencoded({extender: true}));
+true is for the fact we will process more complex types
+
+application/x-www-form-urlencoded   format is the default and works well for gathering basic data values from a user
+multipart/form-data                 format is for files, allows for a mix of data types
+
+<button class="btn btn-primary" formmethod="post">Submit (POST)</button>
+<button class="btn btn-primary" formmethod="post" formenctype="multipart/form-data">Submit (POST/MIME)</button>
+
+hard to determine if a form has multipart/form-data, many non-compliant implementations
+use Multer package
+$ npm install multer@1.4.5-lts.1
+$ npm install --save-dev @types/multer@1.4.11
+
+Multer package is applied to specific routes to prevent malicious users from uploading files on routes where they are not expected
+
+the name attribute from the HTML element should match where Multer looks for the package
+
+fileMiddleware.single('datafile')
+<input type="file" name="datafile" city class="form-control" />
+
+Sanitize data
+most template packages will sanitize data
+
+https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+
+Validating form data
+your logic should only act unpon what the app considers valid data types
+
+Create a custom validator
+pages 338 to page 347
+
+Package for validation
+
+$ npm install validator@13.11.0
+$ npm install --save-dev @types/validator@13.11.5
+
+https://github.com/validatorjs/validator.js
 
 
-LEFT OFF PAGE 310
-
-
-
-
-
-
-
-
-
-
-
-Chapter11
-Handling Form Data
 
 Chapter12
 Using Databases
+
+
+
+
+
+
+
+
+
+LEFT OFF PAGE 352
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Chapter13
 Using Sessions

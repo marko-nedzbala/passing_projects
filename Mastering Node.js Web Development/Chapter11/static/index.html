@@ -5,7 +5,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" />
     </head>
     <body>
-        <form action="">
+        <form action="/form">
             <div class="m-2">
                 <label for="" class="form-label">Name</label>
                 <input type="text" name="name" class="form-control" />
@@ -13,6 +13,17 @@
             <div class="m-2">
                 <label for="" class="form-label">City</label>
                 <input type="text" name="city" class="form-control" />
+            </div>
+            <div class="m-2">
+                <label for="" class="form-label">File</label>
+                <input type="file" name="datafile" city class="form-control" />
+            </div>
+
+            <div class="m-2">
+                <button class="btn btn-primary" formmethod="get">Submit (GET)</button>
+                <button class="btn btn-primary" formmethod="post">Submit (POST)</button>
+                <button class="btn btn-primary" formmethod="post" formenctype="multipart/form-data">
+                    Submit (POST/MIME)</button>
             </div>
         </form>
     </body>
