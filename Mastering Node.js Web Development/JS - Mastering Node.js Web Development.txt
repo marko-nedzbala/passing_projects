@@ -420,6 +420,8 @@ Pakcage for client-side templates
 $ npm install --save-dev handlebars-loader@1.7.3
 
 Need to add this to our webpack file (or just reference it page 306)
+found the information here on webpack
+https://webpack.js.org/loaders/#transpiling
 
 module: {
     rules: [
@@ -436,6 +438,8 @@ module: {
 
 Chapter11
 Handling Form Data
+
+code to page 315 is already completed
 
 
 LEFT OFF PAGE 310
