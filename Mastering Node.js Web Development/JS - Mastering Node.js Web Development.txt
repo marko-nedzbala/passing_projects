@@ -499,6 +499,45 @@ https://github.com/validatorjs/validator.js
 Chapter12
 Using Databases
 
+$ npm install sqlite3@5.1.6
+
+Steps
+1.) Create a repository layer
+2.) Implementing the repository
+3.) Querying the database
+
+
+Create a repository layer
+a layer of code that isolates the database from the rest of the application, makes it easier to change the way that data is read and awritten without needing to change the code that uses that data
+
+named paramters: ${endSql}
+
+ORM package
+$ npm install sequelize@6.35.1
+
+Sequelize
+1.) create the model classes
+2.) Initializing the data model
+3.) Configuring the model relationships
+4.) Define the seed data
+5.) Converting data models to flat objects
+
+Really good chapter for reviewing when you actually build something
+
+
+
+Chapter13
+Using Sessions
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -522,8 +561,7 @@ LEFT OFF PAGE 352
 
 
 
-Chapter13
-Using Sessions
+
 
 Chapter14
 Creating RESTful Web Services
