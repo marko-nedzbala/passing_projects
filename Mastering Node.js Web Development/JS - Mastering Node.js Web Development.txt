@@ -529,42 +529,113 @@ Really good chapter for reviewing when you actually build something
 Chapter13
 Using Sessions
 
+Most common way to correlate requests is via a cookie, if a server creates cookies with unique IDs, thos requests can be identified
+
+Cookies are sent to the browser using the Set-Cookie header,
+hearder value is a:
+    cookie name,
+    a value
+    one or more attributes that tell the browser to manage the cookie
+
+Cookie attributes
+Domain=value        attribute specifies the cookie's domain
+Expires=date        specifies the time and date when the cookie expires
+HttpOnly            tells the browser to prevent JavaScript code from reading the cookie
+Max-Age=second      specifies the number of seconds until the cookie expire, takes precedence over Expires
+Path=path           specifies a path that must be in the URL for the browser to include the cookie
+SameSite=policy     tells the browser whether the cookie should be included in cross-site requests, options: Strict, Lax, None
+Secure              when set, browser will only include the cookie in HTTPS request, and not plain HTTP requests
+
+setJsonCookie() produces cookies with the same configuration, but accepts arbitrary objects that are serialized into the JSON format before being used as the cookie value
+
+A cookie without either Expires or Max-Age attributes is a session cookie, meaning it survivies until the browser is closed
+
+Receiving cookies
+browser includes cookies in request using the Cookie header, contains one or more name=value pairs
+Cookie: user=Alice; otherCookie=othervalue
+
+Signing cookies
+cookies must be verified to ensure they have not been tampered with
+
+Package to manage cookies
+$ npm install cookie-parser@1.4.6
+$ npm install --save-dev @types/cookie-parser@1.4.6
+
+uses middleware
 
 
+Using Sessions
+session data is stored as a set of key/value pairs, easy to use JavaScript objects to represent data
 
+structuredClone function is part of the standard JavaScript API and it creates a deep copy of an object
 
+will need to create the session middleware
 
+Storing session data in a database
 
-
-
-
-
-
-
-
-
-
-
-
-LEFT OFF PAGE 352
-
-
-
-
-
-
-
-
-
-
-
-
-
+Package for sessions
+$ npm install express-session@1.17.3
+$ npm install connect-session-sequelize@7.1.7
+$ npm install --save-dev @types/express-session@1.17.10
 
 
 
 Chapter14
 Creating RESTful Web Services
+
+server responds with "raw" data
+
+Inquirer package provides features for prompting the user
+$ npm install @inquirer/prompts@3.3.0
+
+no formal definitive agreement about what a web serivce is, no single standard to follow and no set of widely adopted patterns
+Web Services: just data access APIs that are accessed over HTTP
+
+GET:    /api/results?name=Alice
+
+Microservices
+https://microservices.io/
+
+OpenAPI specification
+https://www.openapis.org
+
+Best to start by supporting complete updates because they are simpler to implement and move to partial updates only if the unchanged data values start to outnumber the changed values
+
+https://jsonpatch.com/
+$ npm install fast-json-patch@3.1.1
+
+Validating client data
+
+Feathers package for web services
+$ npm install @feathersjs/feathers@5.0.14
+$ npm install @feathersjs/express@5.0.14
+
+
+
+
+
+
+
+
+
+LEFT OFF PAGE 480
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Chapter15
 Authenticating And Authorizing Requests
